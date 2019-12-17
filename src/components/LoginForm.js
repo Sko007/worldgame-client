@@ -1,11 +1,18 @@
 
 import React from 'react'
+import { Link } from "react-router-dom";
+
+
 
 export default function CreateForm (props) {
   const { onSubmit, onChange, values } = props
   const { email, password } = values
 
-  return <form onSubmit={onSubmit}>
+  return <div>
+  <Link to="/"><button type='submit'>Back</button></Link>
+    
+  <form onSubmit={onSubmit}>
+
     <input
       type='text'
       name='email'
@@ -23,5 +30,8 @@ export default function CreateForm (props) {
     />
 
     <button type='submit'>Submit</button>
+
   </form>
+
+  </div>
 }

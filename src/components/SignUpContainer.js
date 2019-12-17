@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { SignUp } from "../actions/SignUp";
-
-
+import { Link } from "react-router-dom";
 
 
 class SignUpContainer extends Component {
@@ -48,16 +47,16 @@ class SignUpContainer extends Component {
         <h1>Sign Up:</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
-            Name:
+            <label>Userame:</label>
             <input
-              name="user"
+              name="username"
               type="text"
-              placeholder="Put your name here"
+              placeholder="Put your Username here"
               value={this.state.user}
               onChange={this.handleChange}
             />
             <br />
-            Email:
+            <label>Emailadr:</label>
             <input
               name="email"
               type="text"
@@ -66,7 +65,7 @@ class SignUpContainer extends Component {
               onChange={this.handleChange}
             />
             <br />
-            Password:
+            <label>Password:</label>
             <input
               name="password"
               type="password"
@@ -76,6 +75,7 @@ class SignUpContainer extends Component {
             />
             <br />
             <button type="submit">Sign up</button>
+            <Link to="/login"><button>Login</button></Link>
           </form>
         </div>
       </div>
