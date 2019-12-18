@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import SignUpContainer from "./components/SignUpContainer";
 import LoginContainer from "./components/LoginFormContainer";
 import LobbyHallContainer from "./components/LobbyHallContainer";
-import WaitRoom from "./components/WaitRoom"
+import GameroomDetail from "./components/GameroomDetail"
 
 class App extends Component {
   url = "http://localhost:4000";
@@ -26,12 +26,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/waitroom/:id" component={WaitRoom} />
+          <Route path="/gameroom/:id" component={GameroomDetail} />
           <Route exact path="/gameroom" component={LobbyHallContainer} />
           <Route exact path="/" component={SignUpContainer} />
           <Route exact path="/signup" component={SignUpContainer} />
           <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/lobbyHall" component={LobbyHallContainer} />
         </Switch>
       </BrowserRouter>
     );

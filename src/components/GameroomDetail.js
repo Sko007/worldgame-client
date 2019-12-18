@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class WaitRoom extends Component {
+class GameroomDetail extends Component {
     render() {
         return (
             <div>
-                <h1>WaitRoom</h1>
+                    <h1>gameroomdetailpage</h1>
             </div>
         );
     }
 }
 
-export default WaitRoom;
+export default GameroomDetail;

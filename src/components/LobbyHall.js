@@ -5,8 +5,6 @@ class LobbyHall extends Component {
 
 
 componentDidMount(){
-    const gamehall = this.props.match.params.gameroom;      
-    console.log("gamehall parameter", gamehall)
 }
 
 
@@ -22,7 +20,7 @@ componentDidMount(){
           <li key={gameroom.id} className="mdc-list-item" tabIndex="0">
             <span className="mdc-list-item__text">
               <span className="mdc-list-item__primary-text">
-                 {gameroom.name} <Link to="/waitroom"><button>Join</button> </Link> 
+                 {gameroom.name} <Link to="/waitroom(:id"><button>Join</button> </Link> 
                 
               </span>
               <span className="mdc-list-item__secondary-text">
