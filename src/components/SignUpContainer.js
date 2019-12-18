@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { SignUp } from "../actions/SignUp";
 import { Link } from "react-router-dom";
+import LoginContainer from "./LoginFormContainer";
 
 
 class SignUpContainer extends Component {
@@ -23,22 +24,20 @@ class SignUpContainer extends Component {
     // alert("Your account has been created!", this.state.value);
     const { email, password, username } = this.state;
 
-    console.log("test the username", username)
 
     const action = SignUp(email, password, username);
 
-    console.log("username after action", username, email)
 
     this.props.dispatch(action);
   };
   render() {
-    if (this.props.jwt === null) {
+
+    console.log("see if the SignupContainer rerenders")
+
+
+    if (this.props.auth !== null) {
       return (
-        <div>
-          <br />
-          <br />
-          <h1>SAWRRRYYYY YOU ARE ALREADY LOGGED IN!!</h1>
-        </div>
+            <LoginContainer />
       );
     }
 
@@ -75,18 +74,20 @@ class SignUpContainer extends Component {
             />
             <br />
             <button type="submit">Sign up</button>
-            <Link to="/login"><button>Login</button></Link>
           </form>
+          <Link to="/login"><button>Login</button></Link>
+
         </div>
       </div>
     );
   }
 }
-// const mapStateToProps = reduxState => {
+const mapStateToProps = reduxState => {
+    console.log("value in signup", reduxState.auth.auth)
+  return {
+    auth: reduxState.auth.auth
+    
+  };
+};
 
-//   return {
-//     // jwt: reduxState.signUp.jwt
-//   };
-// };
-
-export default connect()(SignUpContainer);
+export default connect(mapStateToProps)(SignUpContainer);

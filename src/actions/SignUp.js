@@ -4,27 +4,25 @@ import request from "superagent"
 const baseUrl = "http://localhost:4000"
 
 
-// export const JWT = 'JWT'
+export const SIGN_UP = 'SIGN_UP'
 
-// function jwt (payload) {
-//   return {
-//     type: JWT,
-//     payload
-//   }
-// }
+function signup (payload) {
+  return {
+    type: SIGN_UP,
+    payload : payload
+  }
+}
 
 export const SignUp = (email, password, username) => dispatch => {
     request
       .post(`${baseUrl}/signup`)
       .send({ email, password, username })
       .then(response => {
-          console.log("test thunk in action.js", response)
 
+        const action = signup(response.body.email)
 
-        // const action = jwt(response.body.jwt)
-
-        // console.log("test the jwt actoin", action)
+        console.log("test response of Signup", response)
   
-        // dispatch(action)
+        dispatch(action)
       })
   }

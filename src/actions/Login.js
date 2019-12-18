@@ -16,10 +16,10 @@ function handleErrors(res) {
 
 export const JWT = 'JWT'
 
-function jwt (payload) {
+function jwt (jwt) {
   return {
     type: JWT,
-    payload
+    payload: jwt
   }
 }
 

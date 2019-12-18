@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from "./LoginForm";
 import { connect } from "react-redux";
 import { login } from "../actions/Login";
-import LobbyHall from "./LobbyHall";
+import LobbyHallContainer from "./LobbyHallContainer";
 
 class LoginFormContainer extends React.Component {
   state = { email: "", password: "" };
@@ -15,7 +15,7 @@ class LoginFormContainer extends React.Component {
     const action = login(email, password);
     this.props.dispatch(action);
   };
-
+x
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -24,6 +24,8 @@ class LoginFormContainer extends React.Component {
 
   render() {
     const checkToken = this.props.jwt;
+    console.log("see if Loginformcontainer rerenders")
+
 
     // console.log("test token in render method", checkToken);
 
@@ -36,14 +38,17 @@ class LoginFormContainer extends React.Component {
         />
       );
     } else {
-      return <LobbyHall />;
+      return <LobbyHallContainer 
+        events={this.props.events}/>;
     }
   }
 }
 
 const mapStateToProps = reduxState => {
+
   return {
-    jwt: reduxState.user
+    jwt: reduxState.user.jwt,
+
   };
 };
 

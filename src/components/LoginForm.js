@@ -9,7 +9,6 @@ export default function CreateForm (props) {
   const { email, password } = values
 
   return <div>
-  <Link to="/"><button type='submit'>Back</button></Link>
     
   <form onSubmit={onSubmit}>
 
