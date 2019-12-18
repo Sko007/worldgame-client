@@ -4,16 +4,6 @@ const baseUrl = "http://localhost:4000"
 
 
 
-function handleErrors(res) {
-    if (res.ok) {
-        return res.json();
-    } else {
-       return res.json().then(err => {throw err;});
-    }
-}
-
-
-
 export const JWT = 'JWT'
 
 function jwt (jwt) {
@@ -22,16 +12,6 @@ function jwt (jwt) {
     payload: jwt
   }
 }
-
-// export const ERROR = 'ERROR'
-
-
-// function error (res) {
-//     return {
-//       type: "ERROR",
-//       payload: res
-//     }
-//   }
 
 
 export const login = (email, password) => dispatch => {

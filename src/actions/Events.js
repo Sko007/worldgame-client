@@ -1,17 +1,84 @@
-// export const ALL_MESSAGES = 'ALL_MESSAGES'
+import request from 'superagent'
 
-// export function allMessages (messages) {
-//   return {
-//     type: ALL_MESSAGES,
-//     payload: messages
-//   }
-// }
+export const EVENTS_FETCHED = 'EVENTS_FETCHED'
+export const EVENT_FETCHED = 'EVENT_FETCHED'
+export const EVENT_UPDATE_SUCCESS = 'EVENT_UPDATE_SUCCESS'
+export const EVENT_DELETE_SUCCESS = 'EVENT_DELETE_SUCCESS'
+export const EVENT_CREATE_SUCCESS = 'EVENT_CREATE_SUCCESS'
 
-// export const NEW_MESSAGE = 'NEW_MESSAGE'
+const baseUrl = 'http://localhost:4000'
 
-// export function newMessage (message) {
-//   return {
-//     type: NEW_MESSAGE,
-//     payload: message
-//   }
-// }
+const eventsFetched = events => ({
+  type: EVENTS_FETCHED,
+  events
+})
+
+const eventFetched = event => ({
+  type: EVENT_FETCHED,
+  event
+})
+
+const eventUpdateSuccess = event => ({
+  type: EVENT_UPDATE_SUCCESS,
+  event
+})
+
+const eventDeleteSuccess = eventId => ({
+  type: EVENT_DELETE_SUCCESS,
+  eventId
+})
+
+const eventCreateSuccess = event => ({
+  type: EVENT_CREATE_SUCCESS,
+  event
+})
+
+export const createEvent = (data) => dispatch => {
+  request
+    .post(`${baseUrl}/events`)
+    .send(data)
+    .then(response => {
+      dispatch(eventCreateSuccess(response.body))
+    })
+    .catch(console.error)
+}
+
+export const loadEvents = () => (dispatch, getState) => {
+  if (getState().events) return
+  
+  request(`${baseUrl}/events`)
+    .then(response => {
+      dispatch(eventsFetched(response.body))
+    })
+    .catch(console.error)
+}
+
+export const loadEvent = (id) => (dispatch, getState) => {
+  const state = getState().event
+  if (state && state.id === id) return
+  
+  request(`${baseUrl}/events/${id}`)
+    .then(response => {
+      dispatch(eventFetched(response.body))
+    })
+    .catch(console.error)
+}
+
+export const updateEvent = (id, data) => dispatch => {
+  request
+    .patch(`${baseUrl}/events/${id}`)
+    .send(data)
+    .then(response => {
+      dispatch(eventUpdateSuccess(response.body))
+    })
+    .catch(console.error)
+}
+
+export const deleteEvent = id => dispatch => {
+  request
+    .delete(`${baseUrl}/events/${id}`)
+    .then(response => {
+      dispatch(eventDeleteSuccess(id))
+    })
+    .catch(console.error)
+}

@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import superagent from "superagent";
 import LobbyHall from "./LobbyHall";
+import {loadEvent} from "../actions/Events"
 
 class LobbyHallContainer extends Component {
+
+
+
+
+
+
+
+
+
+
   url = "http://localhost:4000";
 
   state = {
@@ -11,6 +22,8 @@ class LobbyHallContainer extends Component {
   };
 
   onSubmit = async event => {
+
+
     event.preventDefault();
     const jwt = this.props.jwt;
 
@@ -26,6 +39,21 @@ class LobbyHallContainer extends Component {
     }
     this.setState({ text: "" });
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   onChange = event => {
     const { value } = event.target;
     this.setState({ text: value });
@@ -44,17 +72,19 @@ class LobbyHallContainer extends Component {
           <button>Create A Room</button>
         </form>
 
-        <LobbyHall events={this.props.events} id={this.props.id}/>
+        <LobbyHall gameroom={this.props.gameroom}  />
       </div>
     );
   }
 }
 
 const mapStateToProps = reduxState => {
-  console.log("lobbycontainer retrieve from store", reduxState.events);
+    console.log("reduxState with all gamerooms", reduxState.event)
+
   return {
     jwt: reduxState.user.jwt,
-    events: reduxState.events
+    gameroom: reduxState.gamerooms,
+    
   };
 };
 

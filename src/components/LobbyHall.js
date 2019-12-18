@@ -4,23 +4,24 @@ import { Link } from "react-router-dom";
 class LobbyHall extends Component {
 
 
-componentDidMount(){
-}
+ 
 
 
   render() {
 
+   
+
     console.log("See Only Lobbyhall rerenders")
-    const gamerooms = this.props.events;
+    const gamerooms = this.props.gameroom;
     console.log("How do the gamerooms look like", gamerooms)
 
-    const list = gamerooms.map((gameroom, index) => {
+    const list = gamerooms.map((game, index) => {
       return (
         <ul key={index} className="mdc-list mdc-list--two-line">
-          <li key={gameroom.id} className="mdc-list-item" tabIndex="0">
+          <li key={game.id} className="mdc-list-item" tabIndex="0">
             <span className="mdc-list-item__text">
               <span className="mdc-list-item__primary-text">
-                 {gameroom.name} <Link to="/waitroom(:id"><button>Join</button> </Link> 
+                 {game.name} <Link to={`/gameroom/${game.id}`}><button>Join</button> </Link> 
                 
               </span>
               <span className="mdc-list-item__secondary-text">
@@ -39,3 +40,6 @@ componentDidMount(){
 }
 
 export default LobbyHall;
+
+
+

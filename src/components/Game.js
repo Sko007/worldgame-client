@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class GameroomDetail extends Component {
+class Game extends Component {
     render() {
         return (
             <div>
-                    <h1>gameroomdetailpage</h1>
+                <h1>game will be rendered here</h1>
             </div>
         );
     }
 }
 
-export default GameroomDetail;
+export default Game;
