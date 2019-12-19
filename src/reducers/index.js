@@ -2,9 +2,9 @@ import { combineReducers } from 'redux'
 import user from './UserReducer'
 import auth from "./SignUpReducer"
 import lobby from "./Lobbyreducer"
-import {Gamereducer} from "./EventReducer"
-import {Eventsreducer} from './EventReducer'
-import {Eventreducer} from './EventReducer'
+import Gamereducer from "./Gamereducer"
+// import {Eventsreducer} from './GameReducer'
+// import {Eventreducer} from "./GameReducer"
 
 
 
@@ -15,8 +15,8 @@ export default combineReducers({
   auth: auth,
   lobby: lobby,
   gamerooms: Gamereducer,
-  events: Eventsreducer,
-  event:Eventreducer
+  // events: Eventsreducer,
+  // event:Eventreducer
 
 
 })

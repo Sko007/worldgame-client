@@ -6,6 +6,8 @@ import SignUpContainer from "./components/SignUpContainer";
 import LoginContainer from "./components/LoginFormContainer";
 import LobbyHallContainer from "./components/LobbyHallContainer";
 import GameroomContainer from "./components/GameroomContainer"
+import Game from "./components/Game"
+
 
 class App extends Component {
   url = "http://localhost:4000";
@@ -27,6 +29,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/gameroom/:id" component={GameroomContainer} />
+          <Route path="/gameroom/:id/game" component={Game} />
           <Route exact path="/gameroom" component={LobbyHallContainer} />
           <Route exact path="/" component={SignUpContainer} />
           <Route exact path="/signup" component={SignUpContainer} />

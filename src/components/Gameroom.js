@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Game from "./Game";
 
 class Gameroom extends Component {
-    render() {
-        return (
-            <div>
-                <h1>wait here</h1>
-            </div>
-        );
+  render() {
+    if (true) {
+
+
+      return <div>Gamewait</div>;
+
+    } else {
+
+
+     return <Game />;
+
+
+
     }
+  }
 }
 
 export default Gameroom;

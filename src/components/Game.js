@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import ReactTooltip from "react-tooltip";
+import MapChart from "./Worldmap";
 
-class Game extends Component {
-    render() {
-        return (
-            <div>
-                <h1>game will be rendered here</h1>
-            </div>
-        );
-    }
+function Worldmap() {
+  const [content, setContent] = useState("");
+
+  console.log(content)
+
+  return (
+    <div>
+      <MapChart setTooltipContent={setContent} />
+      <ReactTooltip>{content}</ReactTooltip>
+    </div>
+  );
 }
 
-export default Game;
+export default (Worldmap);

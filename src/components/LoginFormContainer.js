@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import { login } from "../actions/Login";
 import LobbyHallContainer from "./LobbyHallContainer";
 
+
 class LoginFormContainer extends React.Component {
   state = { email: "", password: "" };
+
 
   onSubmit = event => {
     event.preventDefault();
@@ -15,7 +17,7 @@ class LoginFormContainer extends React.Component {
     const action = login(email, password);
     this.props.dispatch(action);
   };
-x
+
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value

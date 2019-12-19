@@ -4,17 +4,15 @@ import { SignUp } from "../actions/SignUp";
 import { Link } from "react-router-dom";
 import LoginContainer from "./LoginFormContainer";
 
-
 class SignUpContainer extends Component {
   state = {
     email: "",
     password: "",
     username: ""
-
   };
 
   handleChange = event => {
-      console.log("event.target.value", event.target.value)
+    console.log("event.target.value", event.target.value);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -24,21 +22,15 @@ class SignUpContainer extends Component {
     // alert("Your account has been created!", this.state.value);
     const { email, password, username } = this.state;
 
-
     const action = SignUp(email, password, username);
-
 
     this.props.dispatch(action);
   };
   render() {
-
-    console.log("see if the SignupContainer rerenders")
-
+    console.log("see if the SignupContainer rerenders");
 
     if (this.props.auth !== null) {
-      return (
-            <LoginContainer />
-      );
+      return <LoginContainer />;
     }
 
     return (
@@ -75,18 +67,18 @@ class SignUpContainer extends Component {
             <br />
             <button type="submit">Sign up</button>
           </form>
-          <Link to="/login"><button>Login</button></Link>
-
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
         </div>
       </div>
     );
   }
 }
 const mapStateToProps = reduxState => {
-    console.log("value in signup", reduxState.auth.auth)
+  console.log("value in signup", reduxState.auth.auth);
   return {
     auth: reduxState.auth.auth
-    
   };
 };
 

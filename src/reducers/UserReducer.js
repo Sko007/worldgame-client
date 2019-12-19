@@ -1,14 +1,15 @@
-import { JWT } from '../actions/Login'
+import { SAVE_CREDENTIALS } from '../actions/Login'
 
 const initialState = {
-  jwt: null
-
+  jwt: null,
+  username: null,
 }
 
 export default function (state = initialState, action = {}) {
   switch (action.type) {
-    case JWT:
-      return {...state, jwt:action.payload}
+    case SAVE_CREDENTIALS:
+      const { jwt, username } = action.payload;
+      return { jwt, username }
     default:
       return state
   }

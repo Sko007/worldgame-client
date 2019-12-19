@@ -4,12 +4,12 @@ const baseUrl = "http://localhost:4000"
 
 
 
-export const JWT = 'JWT'
+export const SAVE_CREDENTIALS = 'SAVE_CREDENTIALS'
 
-function jwt (jwt) {
+function saveCredentials({ jwt, username }) {
   return {
-    type: JWT,
-    payload: jwt
+    type: SAVE_CREDENTIALS,
+    payload: { jwt, username }
   }
 }
 
@@ -21,7 +21,7 @@ export const login = (email, password) => dispatch => {
     // .then(handleErrors)
     .then(response => {
         console.log("test response in thunk", response)
-      const action = jwt(response.body.jwt)
+      const action = saveCredentials(response.body)
     //   const err = error(response)
 
       console.log("check the action in thunk", action)
