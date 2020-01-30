@@ -6,15 +6,15 @@ const baseUrl = "http://localhost:4000"
 
 export const SAVE_CREDENTIALS = 'SAVE_CREDENTIALS'
 
-function saveCredentials({ jwt, username }) {
+function saveCredentials({ jwt, username, userId }) {
   return {
     type: SAVE_CREDENTIALS,
-    payload: { jwt, username }
+    payload: { jwt, username, userId }
   }
 }
 
 
-export const login = (email, password) => dispatch => {
+export const login = (email, password, userId) => dispatch => {
   request
     .post(`${baseUrl}/login`)
     .send({ email, password })

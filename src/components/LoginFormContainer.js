@@ -26,6 +26,8 @@ class LoginFormContainer extends React.Component {
 
   render() {
     const checkToken = this.props.jwt;
+    console.log("checkToken", checkToken)
+    localStorage.setItem('myData', checkToken);
     console.log("see if Loginformcontainer rerenders")
 
 

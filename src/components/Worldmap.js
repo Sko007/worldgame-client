@@ -19,42 +19,47 @@ const rounded = num => {
   }
 };
 
-const MapChart = ({ setTooltipContent }) => {
+const MapChart = ({ setTooltipContent }, props) => {
+  console.log("check if props arrive", props)
 
   return (
     <>
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
-        <ZoomableGroup>
+        <ZoomableGroup zoom={1.0}>
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map(geo => (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
+                  
                   onClick={() => {
                     const { NAME } = geo.properties;
-                    setTooltipContent(`${NAME}`);
+                    setTooltipContent(`${NAME}!`);
+
 
                   }}
                   onMouseEnter={() => {
-                    // const { NAME } = geo.properties;
-                    setTooltipContent("");
+                    const { NAME } = geo.properties;
+                    setTooltipContent(`${NAME}`);
                   }}
-                  // onMouseLeave={() => {
-                  //   setTooltipContent("");
-                  // }}
+                  onMouseLeave={() => {
+                    const { NAME } = geo.properties;
+                    setTooltipContent(`${NAME}`);
+                  }}
+                  
                   style={{
                     default: {
-                      fill: "#000000",
-                      outline: "none"
+                      fill: "#000044",
+                      outline: "#000000"
                     },
                     hover: {
                       fill: "#F53",
-                      outline: "none"
+                      outline: "#ffffff"
                     },
                     pressed: {
                       fill: "#E42",
-                      outline: "none"
+                      outline: "#000000"
                     }
                   }}
                 />

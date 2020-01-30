@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Switch, BrowserRouter } from "react-router-dom";
-import { Route } from "react-router-dom";
+// import { Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import SignUpContainer from "./components/SignUpContainer";
 import LoginContainer from "./components/LoginFormContainer";
 import LobbyHallContainer from "./components/LobbyHallContainer";
@@ -16,6 +17,8 @@ class App extends Component {
   componentDidMount() {
     this.stream.onmessage = event => {
       const { data } = event;
+
+      console.log("data from stream", data)
       const action = JSON.parse(data);
       console.log("app.js action before dispatch", action)
       this.props.dispatch(action);
@@ -34,6 +37,8 @@ class App extends Component {
           <Route exact path="/" component={SignUpContainer} />
           <Route exact path="/signup" component={SignUpContainer} />
           <Route exact path="/login" component={LoginContainer} />
+          <Route exact path="/" render={() => <Redirect to="/" />} />
+
         </Switch>
       </BrowserRouter>
     );

@@ -9,16 +9,29 @@ class LobbyHall extends Component {
 
 
 
-  onClick = async event => {
+  componentDidMount(){
+    const jwt = this.props.jwt;
+
+      superagent
+      .put(`${this.url}/join`)
+      .set("Authorization", `Bearer ${jwt}`)
+      .send({ gameroomId: null, ready: false })
+      .then(response => console.log("check the response after joun", response.body))
+      .catch(console.error)
+
+  }
+
+
+  onClick = async (event) => {
     const jwt = this.props.jwt;
 
     try {
       const response = await superagent
         .put(`${this.url}/join`)
         .set("Authorization", `Bearer ${jwt}`)
-        .send({ gameroomId: this.props.id });
+        .send({ gameroomId: this.props.id })
+        .then(response => console.log("check the response after joun", response.body))
 
-      console.log("response after create room", response);
     } catch (error) {
       console.warn("error test", error);
     }
@@ -27,7 +40,6 @@ class LobbyHall extends Component {
   render() {
     const id = this.props.id;
     const name = this.props.name;
-    console.log("check name and id", name, id);
 
     return (
       <div>
@@ -38,11 +50,10 @@ class LobbyHall extends Component {
               {name}
               <span className="mdc-list-item__primary-text">
                 <Link to={`/gameroom/${id}`}>
-                  <button onClick={this.onClick}>Join</button>{" "}
+                  <button onClick={this.onClick}>Join</button>
                 </Link>
               </span>
               <span className="mdc-list-item__secondary-text">
-                {/*future username*/}
               </span>
             </span>
           </li>
