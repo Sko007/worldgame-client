@@ -22,11 +22,11 @@ class App extends Component {
       const action = JSON.parse(data);
       console.log("app.js action before dispatch", action)
       this.props.dispatch(action);
+
     };
   }
 
   render() {
-
     console.log("see when the App.js rerenders")
     return (
       <BrowserRouter>

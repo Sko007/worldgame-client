@@ -24,7 +24,7 @@ class LobbyHall extends Component {
 
   onClick = async (event) => {
     const jwt = this.props.jwt;
-
+    console.log("check this.props.id", this.props.id)
     try {
       const response = await superagent
         .put(`${this.url}/join`)

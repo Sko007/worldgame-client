@@ -13,7 +13,15 @@ class LobbyHallContainer extends Component {
 
 
   componentDidMount(){
-    
+    const jwt = this.props.jwt;
+
+      superagent
+      .put(`${this.url}/join`)
+      .set("Authorization", `Bearer ${jwt}`)
+      .send({ gameroomId: 10000, ready: false })
+      .then(response => console.log("check the response after joun", response.body))
+      .catch(console.error)
+
   }
 
   //////create a room///////////

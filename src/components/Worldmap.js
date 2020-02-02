@@ -36,8 +36,6 @@ const MapChart = ({ setTooltipContent }, props) => {
                   onClick={() => {
                     const { NAME } = geo.properties;
                     setTooltipContent(`${NAME}!`);
-
-
                   }}
                   onMouseEnter={() => {
                     const { NAME } = geo.properties;
@@ -45,7 +43,7 @@ const MapChart = ({ setTooltipContent }, props) => {
                   }}
                   onMouseLeave={() => {
                     const { NAME } = geo.properties;
-                    setTooltipContent(`${NAME}`);
+                    setTooltipContent("");
                   }}
                   
                   style={{

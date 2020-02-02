@@ -1,7 +1,5 @@
 
-
-
-export default function ( state = [], action = {}) {
+export default function ( state = {}, action = {}) {
 
   console.log("check the gamerooms reducer", action.payload)
     switch (action.type) {
