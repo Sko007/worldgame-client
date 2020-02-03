@@ -34,11 +34,12 @@ class Gameroom extends Component {
     //   this.setState({ answer: null });
 
       superagent
-        .put(`${this.url}/gamelogic`)
+        .post(`${this.url}/checkAnswer`)
         .set("Authorization", `Bearer ${this.props.jwt}`)
         .send({ answerGiven: true, 
           answer:this.state.answer,
-           answerId: this.props.gamelogic.question.id,
+           questionId: this.props.questionId,
+           gameroomId: Number(this.props.params)
           })
         .then(response => {
                     console.log("check response of question route", response)}
@@ -106,13 +107,17 @@ class Gameroom extends Component {
           <h1>Players in the Game</h1>
           <span>
             {this.props.users.map(players => {
-              return <span key={players.id}>{players.username} </span>;
+              return (
+                <div>
+              <span key={players.id}>{players.username} </span>
+                  <p>{players.score} Points</p>
+              </div>)
             })}
           </span>
-          <h1>{this.props.oneQuestion}</h1>
-            <h1>This is your answer {this.state.answer}</h1>
-          <h3 style={{ color: "green" }}>
-          </h3> 
+          <h1>{this.props.oneQuestion}?</h1>
+         <h4>This is your answer <h3 style={{ color: "green" }}> {this.state.answer}
+          {this.state.answer ? <button onClick={this.checkAnswer}>confirmation</button> : null}
+          </h3> </h4>
        
 
           <div>

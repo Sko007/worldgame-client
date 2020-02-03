@@ -18,7 +18,7 @@ class LobbyHallContainer extends Component {
       superagent
       .put(`${this.url}/join`)
       .set("Authorization", `Bearer ${jwt}`)
-      .send({ gameroomId: 10000, ready: false })
+      .send({ gameroomId: null, ready: false })
       .then(response => console.log("check the response after joun", response.body))
       .catch(console.error)
 

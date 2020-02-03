@@ -65,12 +65,7 @@ class GameroomContainer extends Component {
     if (!this.props.userId) {
       return "wait until userdata arrives";
     }
-
-
-    // if(this.props.gamerooms.questions === undefined){
-    //   return "wait for questions"
-    // }
-
+ 
 
     const findGameroom = this.props.gamerooms.find(gameroom => {
       return gameroom.id === Number(this.props.match.params.id);
@@ -81,33 +76,17 @@ class GameroomContainer extends Component {
 
     
     const getQuestion = findGameroom.questions.map(question => question.question)
-    console.log("findGameroomQestuiosnln", getQuestion)
+    const questionId = findGameroom.questions.map(question => question.id)
 
+    console.log("findGameroomQestuiosnln", getQuestion)
+    console.log("findQuesitonId", questionId)
+
+
+    const firstQuestionId = questionId[0]
     const oneQuestion = getQuestion[0]
     console.log("oneQuestion",oneQuestion)
-    // const getGameroom = {...findGameroom, questions:[]}
-    //   if(!getGameroom.questions){
-    //     return "wait for questions"
-    //   }
-    
-    // const getQuestion = getGameroom.questions.map(question=> {
-    
-    //     console.log("check insidemap", question.question)
-    //     return question.question
-        
-      
-    // })
-      
-    // console.log("getQuestion gameroom", getQuestion)
-    
-    
+
     console.log("findroom", findGameroom)
-
-    // const getQuestion = getArray.map(question => question)
-    // console.log("getQUestion", getQuestion)
-
-    // const getQuestion = findGameroom.questions
-    // console.log("check if question is available", getQuestion, findGameroom)
 
 
     console.log(
@@ -119,7 +98,7 @@ class GameroomContainer extends Component {
 
     if (
       getUser.every(ele => {
-        return ele.ready == true}) === false
+        return ele.ready === true}) === false
     ) {
       return (
         <div>
@@ -147,7 +126,7 @@ class GameroomContainer extends Component {
                     <p>{user.username}</p>
 
                     {user.id === this.props.userId.userId ? (
-                      <button style={{ color: "green" }} onClick={this.ready}>
+                      <button style={{ color: "green" }} onClick={this.notReady}>
                         I am ready
                       </button>
                     ) : (
@@ -175,8 +154,8 @@ class GameroomContainer extends Component {
             userId={this.props.userId.userId}
             gameroom={findGameroom}
             startGame={this.state.startGame}
-            // startQuestion={getQuestion}
             oneQuestion={oneQuestion}
+            questionId={firstQuestionId}
           />
         </div>
       );
