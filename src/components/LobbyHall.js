@@ -9,17 +9,7 @@ class LobbyHall extends Component {
 
 
 
-  componentDidMount(){
-    const jwt = this.props.jwt;
 
-      superagent
-      .put(`${this.url}/join`)
-      .set("Authorization", `Bearer ${jwt}`)
-      .send({ gameroomId: null, ready: false })
-      .then(response => console.log("check the response after joun", response.body))
-      .catch(console.error)
-
-  }
 
 
   onClick = async (event) => {

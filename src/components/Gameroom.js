@@ -9,67 +9,62 @@ class Gameroom extends Component {
     answer: null,
     correctAnswer: null,
     answerGiven: false,
-    gameStart:true,
+    gameStart: true,
+    wait: false
   };
 
   url = "http://localhost:4000";
 
 
+  componentDidMount(){
+//     console.log("check componentdidmount gameroom",this.props.getUserId, this.props.userId)
 
+//     if(this.props.getUserIds.includes(this.props.userId)  ){
 
+//     console.log("check inside if gameroom componentdidmount")
+//     this.setState({wait:false})
+// }  
+    console.log("check component didmount in gameroom")
+//     this.setState({wait:true})
 
+// if(userWait === true){
 
-
+//   this.setState({wait:false})
+// }
+  }
 
   checkAnswer = () => {
 
-
-    // if (this.state.answer == this.props.gamelogic.question.answer) {
-    //   this.setState({ correctAnswer: "Your answer is correct" });
-    //   this.setState({ answer: null });
-    // } else {
-    //   this.setState({
-    //     correctAnswer: `${this.state.answer} is Wrong......... correct is: ${this.props.gamelogic.question.answer}`
-    //   });
-    //   this.setState({ answer: null });
-
-      superagent
-        .post(`${this.url}/checkAnswer`)
-        .set("Authorization", `Bearer ${this.props.jwt}`)
-        .send({ answerGiven: true, 
-          answer:this.state.answer,
-           questionId: this.props.questionId,
-           gameroomId: Number(this.props.params)
-          })
-        .then(response => {
-                    console.log("check response of question route", response)}
-          )
-    //       if (
-    //         this.props.users.every(user => user.answerGiven === true) === true
-    //       ) {
-    //         superagent
-    //           .post(`${this.url}/question`)
-    //           .set("Authorization", `Bearer ${this.props.jwt}`)
-    //           .send({})
-    //           .then(response => {
-    //             console.log(
-    //               "response after clear the usermodel",
-    //               response.text
-    //             );
-    //             superagent
-    //               .post(`${this.url}/clearAnswers`)
-    //               .set("Authorization", `Bearer ${this.props.jwt}`)
-    //               .send({ userId: this.props.users.map(user => user.id) })
-    //               .then(response => {
-    //                 console.log("response", response);
-    //               });
-    //           })
-    //           .catch(console.error);
-    //       } else {
-    //       }
-    //     })
-    //     .catch(console.error);
+    // if(userWait === true){
+    // }else{
+      // this.setState({wait:true})
     // }
+    
+
+    superagent
+      .put(`${this.url}/checkAnswer`)
+      .set("Authorization", `Bearer ${this.props.jwt}`)
+      .send({
+        answer: this.state.answer,
+        gameroomId: Number(this.props.params),
+        questionId: this.props.questionId,
+
+      })
+      .then(response => {
+        superagent
+          .post(`${this.url}/newQuestion`)
+          .set("Authorization", `Bearer ${this.props.jwt}`)
+          .send({gameroomId: Number(this.props.params), 
+          questionId: this.props.questionId,
+         })
+          .then(response => {
+            console.log("users in gameroom", this.props.users);
+  
+            
+            console.log("check the response of newQuestion", response)})
+          .catch(console.error);
+      })
+      .catch(console.error);
   };
 
   getAnswer = (id, content) => {
@@ -78,7 +73,7 @@ class Gameroom extends Component {
     const lastItem = arrayContent[arrayContent.length - 1];
 
     if (id === this.props.userId && lastItem == "!") {
-      if (content === null ) {
+      if (content === null) {
         this.setState({ answer: content });
       } else {
         this.setState({ answer: content });
@@ -87,56 +82,103 @@ class Gameroom extends Component {
   };
 
 
+
   render() {
+    if (!this.props.gamerooms) {
+      return "Gamerooms are not arrived yet";
+    }
 
-      if(!this.props.gamerooms){
+    // const userWait = this.props.users.map(user => user.wait === false)
+    // if(userWait === true){
 
-        return "Gamerooms are not arrived yet"
-      }
+    //   this.forceUpdate()
+    // }
 
-      // const checkQuestion = this.props.gamerooms.questions.map(question =>{
-      //     return 
+    // const checkQuestion = this.props.gamerooms.questions.map(question =>{
+    //     return
+      
+    // console.log("startQUestion", startQuestion)
+    // const userWait = this.props.users.every(ele => {return ele.wait === false})
+    const userWait = this.props.users.every(ele => {return ele.wait === false})
+    console.log("value of user Wait", userWait)
+    // if (userWait === true ) {
+      return (
+        <div>
+          <main>
+            <h1>Players in the Game</h1>
+            <span>
+              {this.props.users.map(players => {
+                return (
+                  <div key={players.id}>
+                    <span >{players.username} </span>
+                    <p>{players.score} Points</p>
+                  </div>
+                );
+              })}
+            </span>
+            <h1>{this.props.oneQuestion}?</h1>
+            <div>
+              This is your answer{" "}
+              <h3 style={{ color: "green" }}>
+                
+                {this.state.answer}
+                {this.state.answer ? (
+                  <button onClick={this.checkAnswer}>confirmation</button>
+                ) : null}
+              </h3>
+            </div>
 
-     
-      // console.log("startQUestion", startQuestion)
+            <div>
+              {this.props.users.map(user => {
+                if(user.wait === false && user.id === this.props.userId){
+                  console.log("map the user aloong", user.id, this.props.userId, this.state.wait)
+                  return(
+
+                  <Game
+                  key={user.id}
+                  userId={user.id}
+                  getAnswer={this.getAnswer}
+                  checkAnswer={this.checkAnswer}
+                  users={this.props.users}
+                  />)
+                }
 
 
-    return (
-      <div>
-        <main>
-          <h1>Players in the Game</h1>
-          <span>
-            {this.props.users.map(players => {
-              return (
-                <div>
-              <span key={players.id}>{players.username} </span>
-                  <p>{players.score} Points</p>
-              </div>)
-            })}
-          </span>
-          <h1>{this.props.oneQuestion}?</h1>
-         <h4>This is your answer <h3 style={{ color: "green" }}> {this.state.answer}
-          {this.state.answer ? <button onClick={this.checkAnswer}>confirmation</button> : null}
-          </h3> </h4>
-       
+              })}<h1>please wait until everyone answered the question</h1>
+            </div>
+          </main>
+        </div>
+      );
+    // } else {
+        // return (
+        //   <div>
+        //     <h1>Players in the Game</h1>
+        //     <span>
+        //       {this.props.users.map(players => {
+        //         return (
+        //           <div key={players.id}>
+        //             <span >{players.username} </span>
+        //             <p>{players.score} Points</p>
+        //           </div>
+        //         );
+        //       })}
+        //     </span>
+        //     <h1>{this.props.oneQuestion}?</h1>
+        //     <h1>your answer is {this.state.answer}</h1>
+        //     <h1>Please wait until every User has responded</h1>
+  
+        //   </div>
+        // );
 
-          <div>
-            <Game
-              gamerooms={this.props.gamerooms}
-              userId={this.props.userId}
-              getAnswer={this.getAnswer}
-            />
-          </div>
-        </main>
-      </div>
-    );
+    }
   }
-}
+// }
 
 const mapStateToProps = reduxState => {
-  console.log("check Mapstatetoprops in gamelogic ", reduxState.gamerooms);
+  console.log("check Mapstatetoprops in in gamerooms, gamerooms ", reduxState.gamerooms);
   return {
-    gamerooms: reduxState.gamerooms,
+    gamerooms: reduxState.gamerooms
+    
   };
 };
 

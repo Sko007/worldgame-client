@@ -12,9 +12,12 @@ function Worldmap(props) {
 
   console.log("Country content", content);
 
-
+  
   useEffect(() => {
     props.getAnswer(props.userId, content);
+    // props.checkAnswer(props.userId)
+    
+
   }, [content]);
 
   return (

@@ -10,7 +10,9 @@ class GameroomContainer extends Component {
 
   state = {
     players: null,
-    startGame: false
+    startGame: false,
+    wait: false
+
   };
 
 
@@ -73,6 +75,9 @@ class GameroomContainer extends Component {
 
     const getUser = findGameroom.users;
     const getUserReady = getUser.map(user => user.ready);
+
+    const getUserIds = getUser.map(user => user.id )
+    console.log("getUserId", getUserIds)
 
     
     const getQuestion = findGameroom.questions.map(question => question.question)
@@ -137,9 +142,9 @@ class GameroomContainer extends Component {
               }
             }
           })}
-          {getUserReady.every(ele => ele === true) && (
+          {/* {getUserReady.every(ele => ele === true) && (
             <button onClick={this.startGame}>play game</button>
-          )}
+          )} */}
         </div>
       );
     } else {
@@ -152,6 +157,7 @@ class GameroomContainer extends Component {
             users={getUser}
             jwt={this.props.jwt}
             userId={this.props.userId.userId}
+            getUserIds={getUserIds}
             gameroom={findGameroom}
             startGame={this.state.startGame}
             oneQuestion={oneQuestion}

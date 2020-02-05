@@ -18,7 +18,7 @@ class LobbyHallContainer extends Component {
       superagent
       .put(`${this.url}/join`)
       .set("Authorization", `Bearer ${jwt}`)
-      .send({ gameroomId: null, ready: false })
+      .send({ gameroomId: null, ready: false, score: null, wait:false, answerGiven:false })
       .then(response => console.log("check the response after joun", response.body))
       .catch(console.error)
 
@@ -33,7 +33,8 @@ class LobbyHallContainer extends Component {
       const response = await superagent
         .post(`${this.url}/gameroom`)
         .set("Authorization", `Bearer ${jwt}`)
-        .send({ name: this.state.text });
+        .send({ name: this.state.text
+         });
 
       console.log("response after create room", response);
     } catch (error) {
