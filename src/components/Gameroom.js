@@ -16,30 +16,23 @@ class Gameroom extends Component {
   url = "http://localhost:4000";
 
 
-  componentDidMount(){
-//     console.log("check componentdidmount gameroom",this.props.getUserId, this.props.userId)
+  async componentDidMount(){
+    try {
+      const jwt = this.props.jwt;
 
-//     if(this.props.getUserIds.includes(this.props.userId)  ){
+      const response = await superagent
+        .post(`${this.url}/gameStarted`)
+        .set("Authorization", `Bearer ${jwt}`)
+        .send({ gameStarted: true, gameroomId: this.props.match.params.id })
+        .then(response => console.log("check the response after joun", response.body))
 
-//     console.log("check inside if gameroom componentdidmount")
-//     this.setState({wait:false})
-// }  
-    console.log("check component didmount in gameroom")
-//     this.setState({wait:true})
-
-// if(userWait === true){
-
-//   this.setState({wait:false})
-// }
+    } catch (error) {
+      console.warn("error test", error);
+    }
   }
 
   checkAnswer = () => {
 
-    // if(userWait === true){
-    // }else{
-      // this.setState({wait:true})
-    // }
-    
 
     superagent
       .put(`${this.url}/checkAnswer`)
@@ -130,6 +123,7 @@ class Gameroom extends Component {
 
             <div>
               {this.props.users.map(user => {
+                console.log("map the gamerooms", user.wait, user.id, this.props.userId)
                 if(user.wait === false && user.id === this.props.userId){
                   console.log("map the user aloong", user.id, this.props.userId, this.state.wait)
                   return(

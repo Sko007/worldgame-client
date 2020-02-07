@@ -15,8 +15,11 @@ class GameroomContainer extends Component {
 
   };
 
+  jwt = this.props.jwt;
+
 
   componentDidMount(){
+    
     superagent
           .post(`${this.url}/startGame`)
           .set("Authorization", `Bearer ${this.props.jwt}`)
@@ -33,7 +36,6 @@ class GameroomContainer extends Component {
 
 
 
-  jwt = this.props.jwt;
 
   ready = () => {
     console.log("check the ready function");
@@ -74,10 +76,11 @@ class GameroomContainer extends Component {
     });
 
     const getUser = findGameroom.users;
+
+    console.log("getUser out of gameroom", getUser)
     const getUserReady = getUser.map(user => user.ready);
 
     const getUserIds = getUser.map(user => user.id )
-    console.log("getUserId", getUserIds)
 
     
     const getQuestion = findGameroom.questions.map(question => question.question)
