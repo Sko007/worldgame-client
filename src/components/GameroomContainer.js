@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect, useStore } from "react-redux";
-import { Link } from "react-router-dom";
-import Game from "./Game";
+import { Link, Redirect } from "react-router-dom";
 import Gameroom from "./Gameroom";
 import superagent from "superagent";
 
@@ -11,52 +10,45 @@ class GameroomContainer extends Component {
   state = {
     players: null,
     startGame: false,
-    wait: false
-
+    wait: false,
+    ready: false
   };
 
   jwt = this.props.jwt;
 
-
-  componentDidMount(){
-    
+  componentDidMount() {
     superagent
-          .post(`${this.url}/startGame`)
-          .set("Authorization", `Bearer ${this.props.jwt}`)
-          .send({ gameroomId: Number(this.props.match.params.id)
+      .post(`${this.url}/startGame`)
+      .set("Authorization", `Bearer ${this.props.jwt}`)
+      .send({ gameroomId: Number(this.props.match.params.id) })
 
-          })
-    
-          .then(response => {
-            console.log("response from startGameroute", response)
-          })
-          .catch(console.error);
-    
-      }
-
-
-
+      .then(response => {
+        console.log("response from startGameroute", response);
+      })
+      .catch(console.error);
+  }
 
   ready = () => {
-    console.log("check the ready function");
-
     superagent
       .put(`${this.url}/join`)
       .set("Authorization", `Bearer ${this.jwt}`)
-      .send({ ready: true, gameroomId: Number(this.props.match.params.id)  })
+      .send({ ready: true, gameroomId: Number(this.props.match.params.id) })
 
       .then(response => {
+        this.setState({ready:true})
+
         console.log("check the response after boolean change", response);
       })
       .catch(console.error);
   };
   notReady = () => {
-
     superagent
       .put(`${this.url}/join`)
       .set("Authorization", `Bearer ${this.jwt}`)
       .send({ ready: false, gameroomId: Number(this.props.match.params.id) })
       .then(response => {
+        this.setState({ready:false})
+
         console.log("check the response after boolean change", response);
       })
       .catch(console.error);
@@ -69,45 +61,31 @@ class GameroomContainer extends Component {
     if (!this.props.userId) {
       return "wait until userdata arrives";
     }
- 
 
     const findGameroom = this.props.gamerooms.find(gameroom => {
       return gameroom.id === Number(this.props.match.params.id);
     });
 
+
+    if(findGameroom.gameFinished === true){
+      console.log("inside if route HIt?", findGameroom.gameFinished)
+
+     return <Redirect to={`/finish/${Number(this.props.match.params.id)}`}/>
+
+    }
+
     const getUser = findGameroom.users;
-
-    console.log("getUser out of gameroom", getUser)
-    const getUserReady = getUser.map(user => user.ready);
-
-    const getUserIds = getUser.map(user => user.id )
-
-    
-    const getQuestion = findGameroom.questions.map(question => question.question)
-    const questionId = findGameroom.questions.map(question => question.id)
-
-    console.log("findGameroomQestuiosnln", getQuestion)
-    console.log("findQuesitonId", questionId)
-
-
-    const firstQuestionId = questionId[0]
-    const oneQuestion = getQuestion[0]
-    console.log("oneQuestion",oneQuestion)
-
-    console.log("findroom", findGameroom)
-
-
-    console.log(
-      "check what the every function does",
-      getUser.every(ele => ele.ready === true)
+    // const getUserReady = getUser.map(user => user.ready);
+    const getUserIds = getUser.map(user => user.id);
+    const getQuestion = findGameroom.questions.map(
+      question => question.question
     );
-
-    console.log("check userid", this.props.userId.userId)
-
-    if (
-      getUser.every(ele => {
-        return ele.ready === true}) === false
-    ) {
+   const userReady = getUser.every(ele => {return ele.ready === true})
+    const questionId = findGameroom.questions.map(question => question.id);
+    const firstQuestionId = questionId[0];
+    const oneQuestion = getQuestion[0];
+  
+    if (userReady === false) {
       return (
         <div>
           <h1>The great World-game</h1>
@@ -134,7 +112,10 @@ class GameroomContainer extends Component {
                     <p>{user.username}</p>
 
                     {user.id === this.props.userId.userId ? (
-                      <button style={{ color: "green" }} onClick={this.notReady}>
+                      <button
+                        style={{ color: "green" }}
+                        onClick={this.notReady}
+                      >
                         I am ready
                       </button>
                     ) : (
@@ -145,16 +126,15 @@ class GameroomContainer extends Component {
               }
             }
           })}
-          {/* {getUserReady.every(ele => ele === true) && (
-            <button onClick={this.startGame}>play game</button>
-          )} */}
+       
         </div>
       );
-    } else {
-
+    } else 
+     
+    {
       return (
+        
         <div>
-
           <Gameroom
             params={this.props.match.params.id}
             users={getUser}
@@ -165,6 +145,7 @@ class GameroomContainer extends Component {
             startGame={this.state.startGame}
             oneQuestion={oneQuestion}
             questionId={firstQuestionId}
+            gameFinished={findGameroom.gameFinished}
           />
         </div>
       );
@@ -173,12 +154,10 @@ class GameroomContainer extends Component {
 }
 
 const mapStateToProps = reduxState => {
- 
   return {
     jwt: reduxState.user.jwt,
     gamerooms: reduxState.gamerooms,
-    userId: reduxState.user,
-
+    userId: reduxState.user
   };
 };
 

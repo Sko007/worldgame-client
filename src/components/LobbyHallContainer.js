@@ -21,14 +21,12 @@ class LobbyHallContainer extends Component {
       .send({ gameroomId: null, ready: false, score: null, wait:false, answerGiven:false })
       .then(response => console.log("check the response after joun", response.body))
       .catch(console.error)
-    console.log("check id get request is executed")
+
       superagent
       .get(`${this.url}/fetchUser`)
       .set("Authorization", `Bearer ${jwt}`)
       .then(response => console.log("check the response after fetch all user", response.body))
       .catch(console.error)
-
-      
 
   }
 
@@ -77,6 +75,7 @@ class LobbyHallContainer extends Component {
       return <LobbyHall key={game.id} name={game.name} id={game.id} />}
     });
 
+    const sortUser = getUser.sort()
     const getUserData =  
      getUser.map((user, index) => {
       return (

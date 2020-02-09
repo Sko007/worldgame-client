@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { SignUp } from "../actions/SignUp";
 import { Link } from "react-router-dom";
 import LoginContainer from "./LoginFormContainer";
+import "./Css/Signup.css"
 
 class SignUpContainer extends Component {
   state = {
@@ -34,9 +35,9 @@ class SignUpContainer extends Component {
     }
 
     return (
-      <div>
+      <div className="App-header" >
         <h1>Sign Up:</h1>
-        <div>
+        <div className="App-header">
           <form onSubmit={this.handleSubmit}>
             <label>Userame:</label>
             <input

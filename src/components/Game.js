@@ -11,11 +11,21 @@ function Worldmap(props) {
   const [prevRender, prevRenderhandler] = useState(true);
 
   console.log("Country content", content);
-
+  
   
   useEffect(() => {
+    const  url = "http://localhost:4000";
     props.getAnswer(props.userId, content);
     // props.checkAnswer(props.userId)
+    superagent
+    .post(`${url}/gameStarted`)
+    .set("Authorization", `Bearer ${props.jwt}`)
+    .send({ gameroomId: Number(props.params) })
+
+    .then(response => {
+      console.log("response from startGameroute", response);
+    })
+    .catch(console.error);
     
 
   }, [content]);
