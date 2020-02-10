@@ -33,7 +33,8 @@ class GamefinishedContainer extends Component {
             return "Loading"
         }
         if(!this.props.gamerooms){
-                return "Loading"
+            return <Link to={"/gameroom"}>New Game</Link>
+
         }
         if(!this.props.userId){
             return "Loading"
@@ -48,11 +49,27 @@ class GamefinishedContainer extends Component {
           const getUserWon = getUser.find(user => user.won === true)
 
             console.log("getUserWon", getUserWon)
+
+            if(getUserWon === undefined){
+
+                return (
+                    <div className="question">
+                        <Gamewon></Gamewon>
+                        <h1>Most likly you answered all the Questions or another error</h1>
+                        <Link to={"/gameroom"}>New Game</Link>
+                    </div>
+                );  
+
+
+
+            }
+
+
             if(getUserWon.id === this.props.userId.userId){
                 return (
                     <div className="winner">
                         <Gamewon></Gamewon>
-                        <h1>werner hat das rennen gemacht</h1>
+                        <h1>{this.props.username}made it!</h1>
                         <Link to={"/gameroom"}>New Game</Link>
                     </div>
                 );
@@ -62,7 +79,7 @@ class GamefinishedContainer extends Component {
                 return (
                     <div className="looser">
                         <Gamelose></Gamelose>
-                        <h1>werner hat das rennen gemacht</h1>
+                        <h1>{this.props.username}made it!</h1>
                         <Link to={"/gameroom"}>New Game</Link>
                     </div>
                 );
@@ -79,6 +96,8 @@ const mapStateToProps = (reduxState) =>{
     jwt: reduxState.user.jwt,
     gamerooms:reduxState.gamerooms,
     userId: reduxState.user,
+    username: reduxState.user.username
+
 
         
 
