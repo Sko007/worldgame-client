@@ -3,6 +3,10 @@ import { connect, useStore } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import Gameroom from "./Gameroom";
 import superagent from "superagent";
+import "./Css/Gameroom.css"
+import Header from "./Items/Menue copy"
+import UserCardReady from "./Items/userCardready"
+import UserCardnotReady from "./Items/userCardnotReady"
 
 class GameroomContainer extends Component {
   url = "http://localhost:4000";
@@ -81,13 +85,16 @@ class GameroomContainer extends Component {
       question => question.question
     );
    const userReady = getUser.every(ele => {return ele.ready === true})
+
     const questionId = findGameroom.questions.map(question => question.id);
     const firstQuestionId = questionId[0];
     const oneQuestion = getQuestion[0];
   
     if (userReady === false) {
       return (
-        <div>
+        <div className="gameroom-container">
+          <Header username={this.props.username} />
+
           <h1>The great World-game</h1>
           <p>available Player inside the room:</p>
 
@@ -96,22 +103,43 @@ class GameroomContainer extends Component {
               if (user.ready === false) {
                 return (
                   <div key={user.id}>
-                    <p>{user.username}</p>
-                    {user.id === this.props.userId.userId ? (
+
+                    <UserCardReady id={user.id} 
+                          username={user.username}
+                            ready={this.ready}
+                            // notReady={this.notReady}
+                            outsideId={this.props.userId.userId}
+                          >
+
+
+
+                          </UserCardReady>
+                    {/* <p>{user.username}</p> */}
+                    {/* {user.id === this.props.userId.userId ? (
                       <button style={{ color: "red" }} onClick={this.ready}>
                         I am not ready!
                       </button>
                     ) : (
                       <span style={{ color: "red" }}>I am not ready</span>
-                    )}
+                    )} */}
                   </div>
                 );
               } else {
                 return (
                   <div>
-                    <p>{user.username}</p>
+                    {/* <p>{user.username}</p> */}
 
-                    {user.id === this.props.userId.userId ? (
+                    <UserCardnotReady id={user.id} 
+                          username={user.username}
+                            notReady={this.notReady}
+                            outsideId={this.props.userId.userId}
+                          >
+
+
+
+                          </UserCardnotReady>
+    
+                    {/* {user.id === this.props.userId.userId ? (
                       <button
                         style={{ color: "green" }}
                         onClick={this.notReady}
@@ -120,7 +148,7 @@ class GameroomContainer extends Component {
                       </button>
                     ) : (
                       <span style={{ color: "green" }}>I am ready</span>
-                    )}
+                    )} */}
                   </div>
                 );
               }
@@ -157,7 +185,9 @@ const mapStateToProps = reduxState => {
   return {
     jwt: reduxState.user.jwt,
     gamerooms: reduxState.gamerooms,
-    userId: reduxState.user
+    userId: reduxState.user,
+    username: reduxState.user.username,
+
   };
 };
 

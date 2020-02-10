@@ -1,0 +1,56 @@
+.gameroom-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+     width:100%;
+     min-height: 100vh;
+    background-image: url("../../Statics/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+}
+.gamerooms{
+    margin-top: 2%;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card{
+    color:red!;
+    background-color: brown!;
+    
+}
+.flexbox-vertical{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    background-color: #009687;
+    color: white;
+}
+
+in-gameroom{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-content: center;
+    justify-content: space-evenly;
+
+}
+
+h4{
+
+    border-right: 1px solid black;
+
+}
+
+.margin{
+
+    padding-right: 6px;
+    padding-left: 6px;
+
+
+}

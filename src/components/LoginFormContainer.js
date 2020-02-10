@@ -3,6 +3,9 @@ import LoginForm from "./LoginForm";
 import { connect } from "react-redux";
 import { login } from "../actions/Login";
 import LobbyHallContainer from "./LobbyHallContainer";
+import {Redirect} from "react-router-dom"
+import { Button, Form } from "semantic-ui-react";
+
 
 
 class LoginFormContainer extends React.Component {
@@ -27,7 +30,6 @@ class LoginFormContainer extends React.Component {
   render() {
     const checkToken = this.props.jwt;
     console.log("checkToken", checkToken)
-    localStorage.setItem('myData', checkToken);
     console.log("see if Loginformcontainer rerenders")
 
 
@@ -42,8 +44,7 @@ class LoginFormContainer extends React.Component {
         />
       );
     } else {
-      return <LobbyHallContainer 
-        events={this.props.events}/>;
+      return <Redirect to={"/gameroom"}></Redirect>
     }
   }
 }

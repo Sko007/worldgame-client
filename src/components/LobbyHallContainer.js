@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import superagent from "superagent";
 import LobbyHall from "./LobbyHall";
 import { Link } from "react-router-dom";
+import "./Css/Gameroom.css"
+import Header from "../components/Items/Menue copy"
+import Table from "../components/Items/Table"
 
 class LobbyHallContainer extends Component {
   url = "http://localhost:4000";
@@ -75,35 +78,22 @@ class LobbyHallContainer extends Component {
       return <LobbyHall key={game.id} name={game.name} id={game.id} />}
     });
 
-    const sortUser = getUser.sort()
-    const getUserData =  
-     getUser.map((user, index) => {
-      return (
-        <div>
-          <h5>Place number {index +1}. {user.username} {user.totalScore} Points</h5>
-        </div>
-      )
-    })
 
-    // console.log("getUserScore", getUserScore)
-    // const getUser = gamerooms.map((gameroom)=> gameroom.users)
-    // console.log("getUser in LobbyHallcontainer", getUser)
-    // const getScore = getUser.map(user => user.totalScore)
-    // const sortScore = getScore.sort((a,b) => a-b)
-    // console.log("sortScore", sortScore)
 
+ 
     return (
-      <div>
-        <h1>Welcome {this.props.username}, lets play a game!</h1>
-        <h2>Lobby</h2>
-        {getUserData}
+      <div className="gameroom-container">
+        <Header username={this.props.username}></Header>
+        <h2>List of the Best</h2>
+        {/* {getUserData} */}
+        <Table user={getUser} />
         <form onSubmit={this.onSubmit}>
           <input type="text" onChange={this.onChange} value={this.state.text} />
 
           <button>Create A Room</button>
         </form>
 
-        <div>{list}</div>
+        <div className="gamerooms">{list}</div>
       </div>
     );
   }

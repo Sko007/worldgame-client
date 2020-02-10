@@ -30,6 +30,7 @@ class App extends Component {
   render() {
     console.log("see when the App.js rerenders")
     return (
+      <body>
       <BrowserRouter>
         <Switch>
           <Route path="/gameroom/:id" component={GameroomContainer} />
@@ -43,6 +44,7 @@ class App extends Component {
 
         </Switch>
       </BrowserRouter>
+      </body>
     );
   }
 }

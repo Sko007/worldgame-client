@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import superagent from "superagent";
 import { connect } from "react-redux";
+import Card from "../components/Items/Card"
+import "./Css/Gameroom.css"
 
 class LobbyHall extends Component {
 
@@ -32,9 +34,9 @@ class LobbyHall extends Component {
     const name = this.props.name;
 
     return (
-      <div>
-        
-        <ul key={id} className="mdc-list mdc-list--two-line">
+      <div >
+        <Card name={name} id={id} params={this.props.id} click={this.onCLick}></Card>
+        {/* <ul key={id} className="mdc-list mdc-list--two-line">
           <li className="mdc-list-item" tabIndex="0">
             <span className="mdc-list-item__text">
               {name}
@@ -47,7 +49,7 @@ class LobbyHall extends Component {
               </span>
             </span>
           </li>
-        </ul>
+        </ul> */}
       </div>
     );
   }

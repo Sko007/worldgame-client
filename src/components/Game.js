@@ -31,7 +31,7 @@ function Worldmap(props) {
   }, [content]);
 
   return (
-    <div>
+    <div >
       <MapChart setTooltipContent={setContent} />
       <ReactTooltip>{content}</ReactTooltip>
     </div>

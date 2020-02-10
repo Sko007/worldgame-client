@@ -3,6 +3,11 @@ import Game from "./Game";
 import superagent from "superagent";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import Header from "../components/Items/MenuGameroom"
+import "./Css/Gameroom.css"
+import { Button } from 'semantic-ui-react'
+
+
 
 class Gameroom extends Component {
   state = {
@@ -108,47 +113,32 @@ class Gameroom extends Component {
     console.log("value of user Wait", userWait);
     // if (userWait === true ) {
     return (
-      <div>
-        <main>
-          <h1>Players in the Game</h1>
-          <span>
-            {this.props.users.map(players => {
-              return (
-                <div key={players.id}>
-                  <span>{players.username} </span>
-                  <p>{players.score} Points</p>
-                </div>
-              );
-            })}
-          </span>
-         
-          <h1>{this.props.oneQuestion === undefined ? <button onClick={this.finishGame}>No Questions Left click to end the game!</button>:this.props.oneQuestion}?</h1>
+      <div >
+        <Header  users={this.props.users} userId={this.props.userId} />
+
+    
+         <div className="flexbox-vertical">
+          <h1>{this.props.oneQuestion === undefined ? <Button onClick={this.finishGame}>No Questions Left click to end the game!</Button>:this.props.oneQuestion}?</h1>
           {/* <h1>{this.props.oneQuestion}?</h1> */}
+          
           <div>
             This is your answer{" "}
-            <h3 style={{ color: "green" }}>
+            <h1 className="flexbox-vertical" style={{ color: "black" }}>
               {this.state.answer}
               {this.state.answer ? (
-                <button onClick={this.checkAnswer}>confirmation</button>
+                // <button onClick={this.checkAnswer}>confirmation</button>
+                  <Button onClick={this.checkAnswer} secondary>send answer</Button>
+
               ) : null}
-            </h3>
+            </h1>
+          </div>
           </div>
 
           <div>
+            <div>
             {this.props.users.map(user => {
-              console.log(
-                "map the gamerooms",
-                user.wait,
-                user.id,
-                this.props.userId
-              );
               if (user.wait === false && user.id === this.props.userId) {
-                console.log(
-                  "map the user aloong",
-                  user.id,
-                  this.props.userId,
-                  this.state.wait
-                );
+           
                 return (
                   <Game
                     key={user.id}
@@ -164,7 +154,7 @@ class Gameroom extends Component {
             })}
             <h1>please wait until everyone answered the question</h1>
           </div>
-        </main>
+          </div>
       </div>
     );
     // } else {

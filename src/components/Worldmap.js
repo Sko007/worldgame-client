@@ -17,13 +17,25 @@ const rounded = num => {
   } else {
     return Math.round(num / 100) / 10 + "K";
   }
+
 };
+
+
+const wrapperStyles = {
+  width: "100%",
+  height: "100%",
+  backgroundColor: "#009687"
+}
+// const colorScale = scaleLinear()
+//   .domain([0, 100000000, 1338612970]) // Max is based on China
+//   .range(["#FFF176", "#FFC107", "#E65100"])
+ 
 
 const MapChart = ({ setTooltipContent }, props) => {
   console.log("check if props arrive", props)
 
   return (
-    <>
+    <div style={wrapperStyles}>
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
         <ZoomableGroup zoom={1.0}>
           <Geographies geography={geoUrl}>
@@ -32,7 +44,8 @@ const MapChart = ({ setTooltipContent }, props) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  
+                
+
                   onClick={() => {
                     const { NAME } = geo.properties;
                     setTooltipContent(`${NAME}!`);
@@ -48,12 +61,12 @@ const MapChart = ({ setTooltipContent }, props) => {
                   
                   style={{
                     default: {
-                      fill: "#000044",
-                      outline: "#000000"
+                      fill: "#004f6a",
+                      outline: "#000000",
                     },
                     hover: {
-                      fill: "#F53",
-                      outline: "#ffffff"
+                      fill: "#d4d1d1",
+                      outline: "#000000"
                     },
                     pressed: {
                       fill: "#E42",
@@ -66,7 +79,7 @@ const MapChart = ({ setTooltipContent }, props) => {
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
-    </>
+      </div>
   );
 };
 
