@@ -45,7 +45,7 @@ class Gameroom extends Component {
           })
           .then(response => {
             console.log("users in gameroom", this.props.users);
-
+              this.setState({answer:null})
             console.log("check the response of newQuestion", response);
           })
           .catch(console.error);
@@ -111,22 +111,20 @@ class Gameroom extends Component {
       return ele.wait === false;
     });
     console.log("value of user Wait", userWait);
-    // if (userWait === true ) {
     return (
       <div >
         <Header  users={this.props.users} userId={this.props.userId} />
 
     
          <div className="flexbox-vertical">
-          <h1>{this.props.oneQuestion === undefined ? <Button onClick={this.finishGame}>No Questions Left click to end the game!</Button>:this.props.oneQuestion}?</h1>
-          {/* <h1>{this.props.oneQuestion}?</h1> */}
+          <h1 style={{color:"gold"}}>{this.props.oneQuestion === undefined ? <Button onClick={this.finishGame}>No Questions Left click to end the game!</Button>:this.props.oneQuestion}?</h1>
           
+                <h3>Player who scores first 100 Points wins</h3>
           <div>
-            This is your answer{" "}
+            {this.state.answer === null ? <h5>Click on a country to log your answer.</h5>: <h5>This is your answer:</h5>}
             <h1 className="flexbox-vertical" style={{ color: "black" }}>
               {this.state.answer}
               {this.state.answer ? (
-                // <button onClick={this.checkAnswer}>confirmation</button>
                   <Button onClick={this.checkAnswer} secondary>send answer</Button>
 
               ) : null}
@@ -157,29 +155,9 @@ class Gameroom extends Component {
           </div>
       </div>
     );
-    // } else {
-    // return (
-    //   <div>
-    //     <h1>Players in the Game</h1>
-    //     <span>
-    //       {this.props.users.map(players => {
-    //         return (
-    //           <div key={players.id}>
-    //             <span >{players.username} </span>
-    //             <p>{players.score} Points</p>
-    //           </div>
-    //         );
-    //       })}
-    //     </span>
-    //     <h1>{this.props.oneQuestion}?</h1>
-    //     <h1>your answer is {this.state.answer}</h1>
-    //     <h1>Please wait until every User has responded</h1>
 
-    //   </div>
-    // );
   }
 }
-// }
 
 const mapStateToProps = reduxState => {
   console.log(

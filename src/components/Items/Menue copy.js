@@ -17,7 +17,7 @@ export default class MenuExampleEvenlyDivided extends Component {
           active={activeItem === 'buy'}
           onClick={this.handleItemClick}
         >
-        <h1>Welcome {this.props.username}</h1>
+        <h1>Welcome {this.props.username}! Multi or Singleplayer? wait for people to Join your Room.</h1>
 
         </Menu.Item>
 

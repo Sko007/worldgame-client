@@ -39,7 +39,7 @@ class App extends Component {
           <Route exact path="/" component={SignUpContainer} />
           <Route exact path="/signup" component={SignUpContainer} />
           <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/" render={() => <Redirect to="/" />} />
+          {/* <Route exact path="/" render={() => <Redirect to="/" />} /> */}
           <Route path="/finish/:id" component={GamefinishedContainer} />
 
         </Switch>

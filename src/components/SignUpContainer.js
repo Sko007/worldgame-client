@@ -28,13 +28,16 @@ class SignUpContainer extends Component {
     const action = SignUp(email, password, username);
 
     this.props.dispatch(action);
+    this.setState({email:"", password:"",
+  username:""})
+
   };
   render() {
     console.log("see if the SignupContainer rerenders");
 
-    if (this.props.auth !== null) {
-      return ;
-    }
+    // if (this.props.auth !== null) {
+    //   return ;
+    // }
 
 
 
@@ -43,7 +46,7 @@ class SignUpContainer extends Component {
       <div className="outer-wrapper">
 
       <Header />
-      <h1 style={{color:"white"}}>The great Worldgame</h1>
+      <h1 style={{color:"white"}}>The great Worldgame, play in Multiplayer or Singleplayer mode</h1>
 
       <h2 style={{color:"white"}}>You dont have an Account yet? Sign up!</h2>
 

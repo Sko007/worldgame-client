@@ -62,15 +62,15 @@ const MapChart = ({ setTooltipContent }, props) => {
                   style={{
                     default: {
                       fill: "#004f6a",
-                      outline: "#000000",
+                      outline: "black",
                     },
                     hover: {
                       fill: "#d4d1d1",
-                      outline: "#000000"
+                      outline: "black"
                     },
                     pressed: {
                       fill: "#E42",
-                      outline: "#000000"
+                      outline: "black"
                     }
                   }}
                 />
