@@ -20,7 +20,7 @@ class Gameroom extends Component {
   };
 
   // url = "http://localhost:4000";
-  url = "https://worldgame-s.herokuapp.com/"
+  url = "https://worldgame-s.herokuapp.com"
 
 
 
