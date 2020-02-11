@@ -9,7 +9,8 @@ import UserCardReady from "./Items/userCardready";
 import UserCardnotReady from "./Items/userCardnotReady";
 
 class GameroomContainer extends Component {
-  url = "http://localhost:4000";
+  url = "https://worldgame-s.herokuapp.com/"
+  // url = "http://localhost:4000";
 
   state = {
     players: null,
@@ -27,7 +28,6 @@ class GameroomContainer extends Component {
       .send({ gameroomId: Number(this.props.match.params.id) })
 
       .then(response => {
-        console.log("response from startGameroute", response);
       })
       .catch(console.error);
   }
@@ -41,7 +41,6 @@ class GameroomContainer extends Component {
       .then(response => {
         this.setState({ ready: true });
 
-        console.log("check the response after boolean change", response);
       })
       .catch(console.error);
   };
@@ -53,7 +52,6 @@ class GameroomContainer extends Component {
       .then(response => {
         this.setState({ ready: false });
 
-        console.log("check the response after boolean change", response);
       })
       .catch(console.error);
   };

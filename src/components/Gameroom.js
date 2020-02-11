@@ -19,7 +19,9 @@ class Gameroom extends Component {
     wait: false
   };
 
-  url = "http://localhost:4000";
+  // url = "http://localhost:4000";
+  url = "https://worldgame-s.herokuapp.com/"
+
 
 
   componentDidMount() {
@@ -44,9 +46,7 @@ class Gameroom extends Component {
             questionId: this.props.questionId
           })
           .then(response => {
-            console.log("users in gameroom", this.props.users);
               this.setState({answer:null})
-            console.log("check the response of newQuestion", response);
           })
           .catch(console.error);
       })
@@ -54,7 +54,6 @@ class Gameroom extends Component {
   };
 
   getAnswer = (id, content) => {
-    console.log("check content", content.split(""));
     const arrayContent = content.split("");
     const lastItem = arrayContent[arrayContent.length - 1];
 
@@ -110,7 +109,6 @@ class Gameroom extends Component {
     const userWait = this.props.users.every(ele => {
       return ele.wait === false;
     });
-    console.log("value of user Wait", userWait);
     return (
       <div >
         <Header  users={this.props.users} userId={this.props.userId} />
@@ -160,10 +158,7 @@ class Gameroom extends Component {
 }
 
 const mapStateToProps = reduxState => {
-  console.log(
-    "check Mapstatetoprops in in gamerooms, gamerooms ",
-    reduxState.gamerooms
-  );
+
   return {
     gamerooms: reduxState.gamerooms
   };

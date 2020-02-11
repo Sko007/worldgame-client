@@ -10,11 +10,12 @@ function Worldmap(props) {
   const [content, setContent] = useState("");
   const [prevRender, prevRenderhandler] = useState(true);
 
-  console.log("Country content", content);
   
   
   useEffect(() => {
-    const  url = "http://localhost:4000";
+    // const  url = "http://localhost:4000";
+    const url = "https://worldgame-s.herokuapp.com/"
+  
     props.getAnswer(props.userId, content);
     // props.checkAnswer(props.userId)
     superagent
@@ -23,7 +24,7 @@ function Worldmap(props) {
     .send({ gameroomId: Number(props.params) })
 
     .then(response => {
-      console.log("response from startGameroute", response);
+      
     })
     .catch(console.error);
     

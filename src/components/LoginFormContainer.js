@@ -29,11 +29,7 @@ class LoginFormContainer extends React.Component {
 
   render() {
     const checkToken = this.props.jwt;
-    console.log("checkToken", checkToken)
-    console.log("see if Loginformcontainer rerenders")
 
-
-    // console.log("test token in render method", checkToken);
 
     if (!checkToken) {
       return (

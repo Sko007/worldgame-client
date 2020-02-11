@@ -7,7 +7,8 @@ import "./Css/Gameroom.css"
 
 class LobbyHall extends Component {
 
-  url = "http://localhost:4000";
+  // url = "http://localhost:4000";
+  url = "https://worldgame-s.herokuapp.com/"
 
 
 

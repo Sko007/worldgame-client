@@ -9,7 +9,8 @@ import Header from "../components/Items/Menue copy";
 import Table from "../components/Items/Table";
 
 class LobbyHallContainer extends Component {
-  url = "http://localhost:4000";
+  // url = "http://localhost:4000";
+  url = "https://worldgame-s.herokuapp.com/"
 
   state = {
     text: ""
@@ -60,15 +61,13 @@ class LobbyHallContainer extends Component {
     this.setState({ text: "" });
   };
 
-  ////changes
+
   onChange = event => {
     const { value } = event.target;
     this.setState({ text: value });
   };
 
   render() {
-    console.log("see if LobbyContainer rerenders");
-    console.log("check if I fetch all User", this.props.getUser);
 
     if (!this.props.gamerooms) {
       return "no gameroom available";
@@ -90,8 +89,6 @@ class LobbyHallContainer extends Component {
       return b.totalScore - a.totalScore;
     });
 
-    console.log("check sortedUser", getSortedScore);
-    // .sort((a,b) =>{return getUser.score[a]-getUser.score[b]})
 
     return (
       <div className="gameroom-container">
