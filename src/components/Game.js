@@ -14,7 +14,7 @@ function Worldmap(props) {
   
   useEffect(() => {
     // const  url = "http://localhost:4000";
-    const url = "https://worldgame-s.herokuapp.com/"
+    const url = "https://worldgame-s.herokuapp.com"
   
     props.getAnswer(props.userId, content);
     // props.checkAnswer(props.userId)

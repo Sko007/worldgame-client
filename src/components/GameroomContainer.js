@@ -9,7 +9,7 @@ import UserCardReady from "./Items/userCardready";
 import UserCardnotReady from "./Items/userCardnotReady";
 
 class GameroomContainer extends Component {
-  url = "https://worldgame-s.herokuapp.com/"
+  url = "https://worldgame-s.herokuapp.com"
   // url = "http://localhost:4000";
 
   state = {

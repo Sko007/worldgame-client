@@ -1,7 +1,7 @@
 import request from "superagent"
 
 // const baseUrl = "http://localhost:4000"
-const  baseUrl = "https://worldgame-s.herokuapp.com/"
+const  baseUrl = "https://worldgame-s.herokuapp.com"
 
 
 

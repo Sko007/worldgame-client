@@ -10,7 +10,7 @@ import Table from "../components/Items/Table";
 
 class LobbyHallContainer extends Component {
   // url = "http://localhost:4000";
-  url = "https://worldgame-s.herokuapp.com/"
+  url = "https://worldgame-s.herokuapp.com"
 
   state = {
     text: ""
