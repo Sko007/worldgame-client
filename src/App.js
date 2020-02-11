@@ -12,16 +12,16 @@ import GamefinishedContainer from "./components/GamefinishedContainer"
 
 
 class App extends Component {
-  url = "http://localhost:4000";
+  // url = "http://localhost:4000";
+  url = "https://worldgame-s.herokuapp.com"
+
   stream = new EventSource(`${this.url}/stream`);
 
   componentDidMount() {
     this.stream.onmessage = event => {
       const { data } = event;
 
-      console.log("data from stream", data)
       const action = JSON.parse(data);
-      console.log("app.js action before dispatch", action)
       this.props.dispatch(action);
 
     };
@@ -34,12 +34,10 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/gameroom/:id" component={GameroomContainer} />
-          {/* <Route path="/gameroom/:id/game" component={Game} /> */}
           <Route exact path="/gameroom" component={LobbyHallContainer} />
           <Route exact path="/" component={SignUpContainer} />
           <Route exact path="/signup" component={SignUpContainer} />
           <Route exact path="/login" component={LoginContainer} />
-          {/* <Route exact path="/" render={() => <Redirect to="/" />} /> */}
           <Route path="/finish/:id" component={GamefinishedContainer} />
 
         </Switch>
