@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import superagent from "superagent";
 import LobbyHall from "./LobbyHall";
-import { Link } from "react-router-dom";
 import "./Css/Gameroom.css";
 import { Button, Form } from "semantic-ui-react";
 import Header from "../components/Items/Menue copy";
@@ -43,7 +42,6 @@ class LobbyHallContainer extends Component {
       .catch(console.error);
   }
 
-  //////create a room///////////
   onSubmit = async event => {
     event.preventDefault();
     const jwt = this.props.jwt;
@@ -53,14 +51,11 @@ class LobbyHallContainer extends Component {
         .post(`${this.url}/gameroom`)
         .set("Authorization", `Bearer ${jwt}`)
         .send({ name: this.state.text });
-
-      console.log("response after create room", response);
     } catch (error) {
       console.warn("error test", error);
     }
     this.setState({ text: "" });
   };
-
 
   onChange = event => {
     const { value } = event.target;
@@ -68,7 +63,6 @@ class LobbyHallContainer extends Component {
   };
 
   render() {
-
     if (!this.props.gamerooms) {
       return "no gameroom available";
     }
@@ -89,7 +83,6 @@ class LobbyHallContainer extends Component {
       return b.totalScore - a.totalScore;
     });
 
-
     return (
       <div className="gameroom-container">
         <Header username={this.props.username}></Header>
@@ -98,11 +91,9 @@ class LobbyHallContainer extends Component {
         <Form onSubmit={this.onSubmit} className="flexbox-vertical" style={{backgroundColor:"black"}}>
           <Form.Field>
             <input type="text" onChange={this.onChange} value={this.state.text} placeholder="Name of Gameroom"/>
-            
           </Form.Field>
           <Button type="submit">Create a Room</Button>
         </Form>
-
         <div className="gamerooms">{list}</div>
       </div>
     );

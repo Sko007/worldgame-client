@@ -9,8 +9,8 @@ import { Button, Form } from "semantic-ui-react";
 
 
 class LoginFormContainer extends React.Component {
-  state = { email: "", password: "" };
-
+  state = { email: "", 
+    password: "" };
 
   onSubmit = event => {
     event.preventDefault();
@@ -29,8 +29,6 @@ class LoginFormContainer extends React.Component {
 
   render() {
     const checkToken = this.props.jwt;
-
-
     if (!checkToken) {
       return (
         <LoginForm
