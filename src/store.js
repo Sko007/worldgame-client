@@ -1,13 +1,20 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import reducer from "./reducers/index"
-import ReduxThunk from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux';
+import reducer from './reducers/index';
+import ReduxThunk from 'redux-thunk';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+function saveToLocalStorage(state) {
+	try {
+		const serilizedState = JSON.stringify(state);
+		localStorage.setItem('state', serializedState);
+	} catch (e) {
+		console.log('e', e);
+	}
+}
 
-const enhancer = composeEnhancers(
-  applyMiddleware(ReduxThunk)
-)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, enhancer)
+const enhancer = composeEnhancers(applyMiddleware(ReduxThunk));
 
-export default store
+const store = createStore(reducer, enhancer);
+
+export default store;
